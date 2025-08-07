@@ -16,18 +16,9 @@ typedef enum {
     FAN
 } DeviceIndex;
 
-typedef struct {
-    int status[3]; // 0: pump, 1: light, 2: fan
+typedef struct Device_controller Device_controller;
 
-    int (*pump_control)(GPIO_PinState state);
-    int (*light_control)(GPIO_PinState state);
-    int (*fan_control)(GPIO_PinState state);
-
-    int (*get_status_pump)(void);
-    int (*get_status_light)(void);
-    int (*get_status_fan)(void);
-} Device_controller;
-
+Device_controller* get_device_controller(void);
 
 int pump_control(GPIO_PinState state);
 

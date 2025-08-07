@@ -8,6 +8,24 @@
 
 #include "device_control.h"
 #include <stdio.h>
+#include <string.h>
+
+
+struct Device_controller{
+    int status[3]; // 0: pump, 1: light, 2: fan
+
+    int (*pump_control)(GPIO_PinState state);
+    int (*light_control)(GPIO_PinState state);
+    int (*fan_control)(GPIO_PinState state);
+
+    int (*get_status_pump)(void);
+    int (*get_status_light)(void);
+    int (*get_status_fan)(void);
+};
+
+static Device_controller controller_instance;
+static int is_initialized = 0;
+
 int pump_control(GPIO_PinState state)
 {
 	HAL_GPIO_WritePin(GPIOC, PUMP_Pin, state);
@@ -53,14 +71,23 @@ void get_device_status(Device_controller *Controller)
 	Controller->status[LIGHT] = Controller->get_status_light();
 	Controller->status[FAN] = Controller->get_status_fan();
 }
-Device_controller controller = {
-    .pump_control = pump_control,
-    .light_control = light_control,
-    .fan_control = fan_control,
-    .get_status_pump = get_status_pump,
-    .get_status_light = get_status_light,
-    .get_status_fan = get_status_fan
-};
+
+Device_controller* get_device_controller(void)
+{
+    if (!is_initialized) {
+        controller_instance.pump_control = pump_control;
+        controller_instance.light_control = light_control;
+        controller_instance.fan_control = fan_control;
+
+        controller_instance.get_status_pump = get_status_pump;
+        controller_instance.get_status_light = get_status_light;
+        controller_instance.get_status_fan = get_status_fan;
+
+        memset(controller_instance.status, 0, sizeof(controller_instance.status));
+        is_initialized = 1;
+    }
+    return &controller_instance;
+}
 
 
 int* system_controller(int *arr, Device_controller *Controller)
@@ -84,6 +111,7 @@ int* system_controller(int *arr, Device_controller *Controller)
 					break;
 				case FAN:
 					Controller->fan_control(Controller->status[i]);
+					break;
 				default: 
 					break;
 			}

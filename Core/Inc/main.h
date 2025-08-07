@@ -54,6 +54,13 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
+typedef enum {
+	CODE_SUCCESS = 0,
+	CODE_ERROR_READ_SENSOR,
+	CODE_ERROR_INIT_SENSOR
+} Code_status;
+
+extern Code_status Code_ret;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -63,9 +70,11 @@ void Error_Handler(void);
 #define PUMP_GPIO_Port GPIOC
 #define FAN_Pin GPIO_PIN_15
 #define FAN_GPIO_Port GPIOC
+#define MOISTURE_SENSOR_Pin GPIO_PIN_0
+#define MOISTURE_SENSOR_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
-
+extern ADC_HandleTypeDef hadc1;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

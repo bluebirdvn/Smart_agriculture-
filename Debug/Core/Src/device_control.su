@@ -1,8 +1,9 @@
-../Core/Src/device_control.c:11:5:pump_control	16	static
-../Core/Src/device_control.c:17:5:light_control	16	static
-../Core/Src/device_control.c:23:5:fan_control	16	static
-../Core/Src/device_control.c:29:5:get_status_pump	16	static
-../Core/Src/device_control.c:35:5:get_status_light	16	static
-../Core/Src/device_control.c:41:5:get_status_fan	16	static
-../Core/Src/device_control.c:46:6:get_device_status	16	static
-../Core/Src/device_control.c:66:6:system_controller	24	static
+../Core/Src/device_control.c:29:5:pump_control	16	static
+../Core/Src/device_control.c:35:5:light_control	16	static
+../Core/Src/device_control.c:41:5:fan_control	16	static
+../Core/Src/device_control.c:47:5:get_status_pump	16	static
+../Core/Src/device_control.c:53:5:get_status_light	16	static
+../Core/Src/device_control.c:59:5:get_status_fan	16	static
+../Core/Src/device_control.c:64:6:get_device_status	16	static
+../Core/Src/device_control.c:75:20:get_device_controller	8	static
+../Core/Src/device_control.c:93:6:system_controller	24	static
