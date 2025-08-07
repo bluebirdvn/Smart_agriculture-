@@ -7,7 +7,7 @@
 
 
 #include "device_control.h"
-
+#include <stdio.h>
 int pump_control(GPIO_PinState state)
 {
 	HAL_GPIO_WritePin(GPIOC, PUMP_Pin, state);
@@ -49,9 +49,9 @@ void get_device_status(Device_controller *Controller)
 		printf("Controller is Null ptr");
 		return;
 	}
-	Controller->status[PUMP] = Controller->get_status_pump;
-	Controller->status[LIGHT] = Controller->get_status_light;
-	Controller->status[FAN] = Controller->get_status_fan;
+	Controller->status[PUMP] = Controller->get_status_pump();
+	Controller->status[LIGHT] = Controller->get_status_light();
+	Controller->status[FAN] = Controller->get_status_fan();
 }
 Device_controller controller = {
     .pump_control = pump_control,
@@ -63,11 +63,11 @@ Device_controller controller = {
 };
 
 
-int system_controller(int *arr, Device_controller *Controller) 
+int* system_controller(int *arr, Device_controller *Controller)
 {
 	if (Controller == NULL) {
 		printf("Controller is Null ptr");
-		return;
+		return NULL;
 	}
 
 	get_device_status(Controller);
@@ -76,14 +76,14 @@ int system_controller(int *arr, Device_controller *Controller)
 		if (arr[i] != Controller->status[i]) {
 			Controller->status[i] = arr[i];
 			switch(i) {
-				case: PUMP
-					Controller->pump_control(status[i]);
+				case PUMP:
+					Controller->pump_control(Controller->status[i]);
 					break;
-				case: LIGHT
-					Controller->light_control(status[i]);
+				case LIGHT:
+					Controller->light_control(Controller->status[i]);
 					break;
-				case: FAN
-					Controller->fan_control(status[i]);
+				case FAN:
+					Controller->fan_control(Controller->status[i]);
 				default: 
 					break;
 			}
