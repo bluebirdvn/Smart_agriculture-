@@ -37,7 +37,7 @@ static uint8_t read_lux_sensor(BH1750_device_t *BH1750_device)
 		return CODE_ERROR_NULL_PTR;
 	}
 
-	if (HAL_I2C_Master_Receive(&hi2c2, BH1750_device->address_r, BH1750_device->buffer, sizeof(BH1750_device->buffer), 100) == HAL_OK)
+	if (HAL_I2C_Master_Receive(&hi2c1, BH1750_device->address_r, BH1750_device->buffer, sizeof(BH1750_device->buffer), 100) == HAL_OK)
 	        return CODE_SUCCESS;
 	    return CODE_ERROR_READ_SENSOR;
 
@@ -50,7 +50,7 @@ static uint8_t write_cmd_to_lux_sensor(BH1750_device_t *BH1750_device, uint8_t c
 		return CODE_ERROR_NULL_PTR;
 	}
 
-    if (HAL_I2C_Master_Transmit(&hi2c2,BH1750_device->address_w, &cmd, sizeof(cmd), 100) == HAL_OK)
+    if (HAL_I2C_Master_Transmit(&hi2c1,BH1750_device->address_w, &cmd, sizeof(cmd), 100) == HAL_OK)
         return CODE_SUCCESS;
     return CODE_ERROR_READ_SENSOR;
 
