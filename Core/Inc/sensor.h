@@ -14,7 +14,7 @@ typedef struct Sensor Sensor;
 
 uint32_t moisture_sensor(Sensor *sensor);
 
-uint32_t temperature_moisture_sensor(Sensor *sensor);
+uint32_t temperature_humidity_sensor(Sensor *sensor);
 
 uint32_t light_sensor(Sensor *sensor);
 

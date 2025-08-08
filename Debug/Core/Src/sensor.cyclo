@@ -1,2 +1,4 @@
-../Core/Src/sensor.c:22:10:moisture_sensor	2
-../Core/Src/sensor.c:46:9:sensor_init	2
+../Core/Src/sensor.c:38:10:moisture_sensor	2
+../Core/Src/sensor.c:54:10:temperature_humidity_sensor	4
+../Core/Src/sensor.c:70:10:light_sensor	5
+../Core/Src/sensor.c:88:9:sensor_init	2

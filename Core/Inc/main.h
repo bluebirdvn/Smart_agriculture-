@@ -57,7 +57,8 @@ void Error_Handler(void);
 typedef enum {
 	CODE_SUCCESS = 0,
 	CODE_ERROR_READ_SENSOR,
-	CODE_ERROR_INIT_SENSOR
+	CODE_ERROR_INIT_SENSOR,
+	CODE_ERROR_NULL_PTR
 } Code_status;
 
 extern Code_status Code_ret;
